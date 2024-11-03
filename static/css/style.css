@@ -71,38 +71,59 @@ body {
 .performance-stats {
     display: flex;
     justify-content: space-around;
-    margin: 20px 0;
+    margin: 30px 0;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .stat-box {
     text-align: center;
-    padding: 15px;
+    padding: 25px;
+    margin: 10px;
     background: #fff4f9;
-    border-radius: 10px;
-    border: 2px dashed #ff69b4;
+    border-radius: 15px;
+    border: 3px dashed #ff69b4;
     transition: all 0.3s ease;
     cursor: pointer;
+    min-width: 200px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
 }
 
 .stat-box:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     background: #ffe4f3;
     border-style: solid;
+    box-shadow: 0 6px 12px rgba(255, 105, 180, 0.3);
 }
 
 .stat-box.bounce {
-    animation: bounce 0.5s ease;
+    animation: bounce 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) !important;
+    animation-iteration-count: 1 !important;
 }
 
 @keyframes bounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    75% { transform: scale(0.9); }
+    100% { transform: scale(1); }
 }
 
 .stat-box h4 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #ff69b4;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 0px rgba(255, 105, 180, 0.2);
+}
+
+.stat-box p {
+    font-size: 1.2rem;
     margin: 0;
+    color: #666;
 }
 
 .meme-list {
@@ -166,6 +187,11 @@ body {
     
     .performance-stats {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
+    }
+
+    .stat-box {
+        min-width: 180px;
+        min-height: 130px;
     }
 }
