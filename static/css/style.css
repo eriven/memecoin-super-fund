@@ -1,62 +1,256 @@
-[Previous CSS content remains the same...]
-
-/* Footer styles */
-.footer-section {
-    margin-top: 40px;
-    padding: 30px 0;
-    text-align: center;
-    border-top: 2px solid #ff69b4;
-}
-
-.dark-mode .footer-section {
-    border-top-color: #00ff9d;
-}
-
-.social-links {
+/* Loading screen styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f0f0ff;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 30px;
-    margin-bottom: 20px;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
 }
 
-.social-link {
+.dark-mode .loading-overlay {
+    background: #1a1a2e;
+}
+
+.loading-meme {
+    width: 150px;
+    height: 150px;
+    animation: bounce 1s infinite;
+}
+
+.loading-text {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #ff69b4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .loading-text {
+    color: #00ff9d;
+    text-shadow: 2px 2px 4px rgba(0, 255, 157, 0.3);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Hide content initially */
+.content-hidden {
+    opacity: 0;
+}
+
+/* Existing styles */
+body {
+    font-family: 'Comic Neue', cursive;
+    background-color: #f0f0ff;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
-    border-radius: 25px;
-    background: rgba(255, 105, 180, 0.1);
-    color: #ff69b4;
-    text-decoration: none;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
-.dark-mode .social-link {
+.dark-mode .dark-mode-toggle {
+    background: rgba(26, 26, 46, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 255, 157, 0.3);
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .dark-mode-toggle:hover {
+    box-shadow: 0 4px 8px rgba(0, 255, 157, 0.4);
+}
+
+/* Content box styles */
+.content-box {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ff69b4;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .content-box {
+    background: #2a2a40;
+    border-color: #00ff9d;
+    box-shadow: 0 0 15px #00ff9d;
+    color: #fff;
+}
+
+/* Rainbow text animation */
+.rainbow-text {
+    background: linear-gradient(45deg, #ff0000, #ff9a00, #d0de21, #4fdc4a, #3fdad8, #2fc9e2, #1c7fee, #5f15f2);
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow 8s ease infinite;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+@keyframes rainbow { 
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating icons */
+.floating-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-icon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 0.6;
+    animation: float 15s linear infinite;
+    transition: transform 0.3s ease;
+}
+
+.floating-icon.clicked {
+    animation: spin 1s linear;
+}
+
+@keyframes float {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Performance stats */
+.performance-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 105, 180, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.dark-mode .stat-box {
     background: rgba(0, 255, 157, 0.1);
-    color: #00ff9d;
 }
 
-.social-link:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 105, 180, 0.2);
-    color: #ff69b4;
+.stat-box.bounce {
+    animation: bounce 0.5s ease;
 }
 
-.dark-mode .social-link:hover {
-    background: rgba(0, 255, 157, 0.2);
-    color: #00ff9d;
+/* To The Moon button */
+.to-the-moon-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #ff69b4, #ff9a00);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-.social-link i {
-    font-size: 24px;
+.dark-mode .to-the-moon-btn {
+    background: linear-gradient(45deg, #00ff9d, #2fc9e2);
 }
 
-.footer-disclaimer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #666;
+.to-the-moon-btn:hover {
+    transform: translateY(-5px);
 }
 
-.dark-mode .footer-disclaimer {
-    color: #aaa;
+/* Launch animation */
+.launching {
+    animation: launch 2s ease-in;
+}
+
+@keyframes launch {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-1000px) rotate(10deg); }
+}
+
+/* Chart container */
+.chart-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .chart-container {
+    background: #2a2a40;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+}
+
+/* Meme list */
+.meme-list {
+    list-style: none;
+    padding: 0;
+}
+
+.meme-list li {
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(255, 105, 180, 0.1);
+    border-radius: 8px;
+}
+
+.dark-mode .meme-list li {
+    background: rgba(0, 255, 157, 0.1);
 }
