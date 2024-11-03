@@ -1,11 +1,187 @@
-/* Previous styles remain the same up to line 258 */
-/* Meme Footer Styles */
+/* Base styles */
+body {
+    font-family: 'Comic Neue', cursive;
+    background-color: #f0f0ff;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+/* Loading screen styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f0f0ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease-out;
+}
+
+.dark-mode .loading-overlay {
+    background: #1a1a2e;
+}
+
+.loading-meme {
+    width: 150px;
+    height: 150px;
+    animation: bounce 1s infinite;
+}
+
+.loading-text {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #ff69b4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .loading-text {
+    color: #00ff9d;
+    text-shadow: 2px 2px 4px rgba(0, 255, 157, 0.3);
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9000;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.dark-mode .dark-mode-toggle {
+    background: rgba(26, 26, 46, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 255, 157, 0.3);
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.content-hidden {
+    opacity: 0;
+}
+
+/* Floating icons */
+.floating-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-icon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 0.6;
+    animation: float 15s linear infinite;
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+/* Content boxes */
+.content-box {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ff69b4;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.dark-mode .content-box {
+    background: #2a2a40;
+    border-color: #00ff9d;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+}
+
+/* Performance stats */
+.performance-stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 105, 180, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Chart container */
+.chart-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.dark-mode .chart-container {
+    background: #2a2a40;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+}
+
+/* Footer styles */
 .meme-footer {
     background: rgba(255, 105, 180, 0.1);
     padding: 40px 0 20px;
-    margin-top: 50px;
+    margin-top: auto;
     border-top: 2px solid #ff69b4;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .dark-mode .meme-footer {
@@ -23,7 +199,7 @@
 .footer-section.centered-legal {
     max-width: 500px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .footer-section h4 {
@@ -48,6 +224,8 @@
     margin: 15px 0;
     cursor: pointer;
     transition: transform 0.3s ease;
+    position: relative;
+    z-index: 3;
 }
 
 .footer-section ul li:hover {
@@ -72,8 +250,32 @@
     border-top-color: rgba(0, 255, 157, 0.3);
 }
 
+/* Animations */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes float {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes launch {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-1000px) rotate(10deg); }
+}
+
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 2;
 }
