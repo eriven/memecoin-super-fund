@@ -1,3 +1,44 @@
+// Loading screen functionality
+const loadingMessages = [
+    "Mining Dogecoins...",
+    "HODLing Strong...",
+    "Checking Elon's tweets...",
+    "Buying High...",
+    "Planning Moon Mission...",
+    "Drawing Technical Analysis...",
+    "Counting Lambos...",
+    "Reading Reddit DD..."
+];
+
+function updateLoadingText() {
+    const loadingText = document.querySelector('.loading-text');
+    let messageIndex = 0;
+    
+    const interval = setInterval(() => {
+        loadingText.textContent = loadingMessages[messageIndex];
+        messageIndex = (messageIndex + 1) % loadingMessages.length;
+    }, 1000);
+
+    return interval;
+}
+
+function hideLoadingScreen() {
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    const mainContent = document.querySelector('.main-content');
+    
+    // Fade out loading screen
+    loadingOverlay.style.opacity = '0';
+    
+    // Show main content
+    mainContent.classList.remove('content-hidden');
+    mainContent.style.opacity = '1';
+    
+    // Remove loading overlay after animation
+    setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+    }, 500);
+}
+
 // Initialize Tone.js synth
 const synth = new Tone.Synth({
     oscillator: {
@@ -139,6 +180,10 @@ function initializeMoonButton() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Start loading animation
+    const messageInterval = updateLoadingText();
+    
+    // Initialize features
     initializeDarkMode();
     createFloatingIcons();
     initializeStatBoxes();
@@ -151,4 +196,10 @@ document.addEventListener('DOMContentLoaded', () => {
             createFloatingIcons();
         }
     });
+
+    // Simulate loading time (3 seconds)
+    setTimeout(() => {
+        clearInterval(messageInterval);
+        hideLoadingScreen();
+    }, 3000);
 });

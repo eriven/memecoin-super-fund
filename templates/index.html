@@ -11,48 +11,57 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <button class="dark-mode-toggle" id="darkModeToggle">🌞</button>
-    
-    <div class="floating-icons">
-        <!-- Background floating icons will be inserted here by JavaScript -->
+    <!-- Loading Screen -->
+    <div class="loading-overlay">
+        <img src="{{ url_for('static', filename='images/doge.svg') }}" alt="Loading..." class="loading-meme">
+        <div class="loading-text">Loading Stonks...</div>
     </div>
 
-    <div class="container">
-        <header class="text-center my-5">
-            <h1 class="rainbow-text">🚀 Meme Super Fund Coin Cycle Capital 🌙</h1>
-            <h2 class="subtitle">We Only Buy High And Sell Higher! 📈</h2>
-        </header>
+    <!-- Main Content -->
+    <div class="main-content content-hidden">
+        <button class="dark-mode-toggle" id="darkModeToggle">🌞</button>
+        
+        <div class="floating-icons">
+            <!-- Background floating icons will be inserted here by JavaScript -->
+        </div>
 
-        <div class="content-box">
-            <h3>💎 Our Diamond Hands Strategy 💎</h3>
-            <p>We YOLO your investment into the dankest meme coins using advanced technical analysis 
-               (we look at rocket emojis on Twitter).</p>
-            <div class="performance-stats">
-                <div class="stat-box">
-                    <h4>420%</h4>
-                    <p>Annual Returns*</p>
+        <div class="container">
+            <header class="text-center my-5">
+                <h1 class="rainbow-text">🚀 Meme Super Fund Coin Cycle Capital 🌙</h1>
+                <h2 class="subtitle">We Only Buy High And Sell Higher! 📈</h2>
+            </header>
+
+            <div class="content-box">
+                <h3>💎 Our Diamond Hands Strategy 💎</h3>
+                <p>We YOLO your investment into the dankest meme coins using advanced technical analysis 
+                   (we look at rocket emojis on Twitter).</p>
+                <div class="performance-stats">
+                    <div class="stat-box">
+                        <h4>420%</h4>
+                        <p>Annual Returns*</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>69</h4>
+                        <p>Active Investments</p>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <h4>69</h4>
-                    <p>Active Investments</p>
-                </div>
+                <p class="disclaimer">*Past performance doesn't guarantee future results, but memes are forever</p>
+                <button class="to-the-moon-btn">🚀 TO THE MOON! 🌙</button>
             </div>
-            <p class="disclaimer">*Past performance doesn't guarantee future results, but memes are forever</p>
-            <button class="to-the-moon-btn">🚀 TO THE MOON! 🌙</button>
-        </div>
 
-        <div class="chart-container">
-            <canvas id="performanceChart"></canvas>
-        </div>
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
 
-        <div class="content-box mt-4">
-            <h3>🧠 Investment Philosophy 🧠</h3>
-            <ul class="meme-list">
-                <li>Buy high, sell higher (this is financial advice)</li>
-                <li>HODL until Lambo</li>
-                <li>Trust me bro™ investment strategy</li>
-                <li>1 Doge = 1 Doge (always)</li>
-            </ul>
+            <div class="content-box mt-4">
+                <h3>🧠 Investment Philosophy 🧠</h3>
+                <ul class="meme-list">
+                    <li>Buy high, sell higher (this is financial advice)</li>
+                    <li>HODL until Lambo</li>
+                    <li>Trust me bro™ investment strategy</li>
+                    <li>1 Doge = 1 Doge (always)</li>
+                </ul>
+            </div>
         </div>
     </div>
 
