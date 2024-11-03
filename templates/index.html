@@ -54,14 +54,15 @@
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script>
+        const chartData = {{ chart_data|safe }};
         const ctx = document.getElementById('performanceChart').getContext('2d');
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: {{ performance_data.labels|tojson }},
+                labels: chartData.labels,
                 datasets: [{
                     label: 'Portfolio Performance (in Lambos)',
-                    data: {{ performance_data.values|tojson }},
+                    data: chartData.values,
                     borderColor: '#ff69b4',
                     backgroundColor: 'rgba(255, 105, 180, 0.2)',
                     borderWidth: 3,
