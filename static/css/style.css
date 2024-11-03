@@ -95,6 +95,38 @@ body.dark-mode {
     opacity: 0;
 }
 
+/* To The Moon button styles */
+.to-the-moon-btn {
+    display: block;
+    margin: 30px auto;
+    padding: 20px 40px;
+    font-size: 1.5rem;
+    min-width: 250px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.dark-mode .to-the-moon-btn {
+    background: #00ff9d;
+    box-shadow: 0 4px 15px rgba(0, 255, 157, 0.3);
+}
+
+.to-the-moon-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+}
+
+.dark-mode .to-the-moon-btn:hover {
+    box-shadow: 0 6px 20px rgba(0, 255, 157, 0.4);
+}
+
 /* Floating icons */
 .floating-icons {
     position: fixed;
