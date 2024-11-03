@@ -1,3 +1,21 @@
+// Initialize Tone.js synth
+const synth = new Tone.Synth({
+    oscillator: {
+        type: "square"
+    },
+    envelope: {
+        attack: 0.1,
+        decay: 0.2,
+        sustain: 0.5,
+        release: 1
+    }
+}).toDestination();
+
+const coinSound = new Tone.Player({
+    url: "data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA==",
+    autostart: false
+}).toDestination();
+
 // Create floating background icons
 function createFloatingIcons() {
     const icons = ['doge.svg', 'bitcoin.svg', 'ethereum.svg', 'rocket.svg'];
@@ -15,13 +33,75 @@ function createFloatingIcons() {
         // Random animation delay
         icon.style.animationDelay = `${Math.random() * 15}s`;
         
+        // Add click handler
+        icon.addEventListener('click', async () => {
+            if (!icon.classList.contains('clicked')) {
+                icon.classList.add('clicked');
+                // Play coin sound
+                await Tone.start();
+                synth.triggerAttackRelease("C5", "8n");
+                setTimeout(() => {
+                    icon.classList.remove('clicked');
+                }, 1000);
+            }
+        });
+        
         container.appendChild(icon);
     }
 }
 
-// Create new floating icons when existing ones finish animating
+// Add interactivity to stat boxes
+function initializeStatBoxes() {
+    const statBoxes = document.querySelectorAll('.stat-box');
+    statBoxes.forEach(box => {
+        box.addEventListener('click', async () => {
+            if (!box.classList.contains('bounce')) {
+                box.classList.add('bounce');
+                // Play stat sound
+                await Tone.start();
+                synth.triggerAttackRelease("E4", "16n");
+                setTimeout(() => {
+                    box.classList.remove('bounce');
+                }, 500);
+            }
+        });
+    });
+}
+
+// Add "To The Moon" button functionality
+function initializeMoonButton() {
+    const moonBtn = document.querySelector('.to-the-moon-btn');
+    if (moonBtn) {
+        moonBtn.addEventListener('click', async () => {
+            await Tone.start();
+            // Play rocket launch sound
+            const notes = ["C4", "E4", "G4", "C5"];
+            notes.forEach((note, index) => {
+                setTimeout(() => {
+                    synth.triggerAttackRelease(note, "8n");
+                }, index * 100);
+            });
+
+            // Add launching animation to all elements
+            document.querySelectorAll('.content-box, .chart-container').forEach(el => {
+                el.classList.add('launching');
+            });
+
+            // Reset after animation
+            setTimeout(() => {
+                document.querySelectorAll('.launching').forEach(el => {
+                    el.classList.remove('launching');
+                });
+            }, 2000);
+        });
+    }
+}
+
+// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     createFloatingIcons();
+    initializeStatBoxes();
+    initializeMoonButton();
     
     const container = document.querySelector('.floating-icons');
     container.addEventListener('animationend', (e) => {

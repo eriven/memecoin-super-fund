@@ -27,6 +27,11 @@ body {
     margin: 20px 0;
     box-shadow: 5px 5px 0px #ff69b4;
     transform: rotate(-1deg);
+    transition: transform 0.3s ease;
+}
+
+.content-box:hover {
+    transform: rotate(1deg) scale(1.02);
 }
 
 .floating-icons {
@@ -44,6 +49,14 @@ body {
     width: 40px;
     height: 40px;
     animation: float 20s linear infinite;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.floating-icon.clicked {
+    animation-play-state: paused;
+    transform: scale(2) rotate(360deg);
 }
 
 @keyframes float {
@@ -67,6 +80,23 @@ body {
     background: #fff4f9;
     border-radius: 10px;
     border: 2px dashed #ff69b4;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-box:hover {
+    transform: scale(1.1);
+    background: #ffe4f3;
+    border-style: solid;
+}
+
+.stat-box.bounce {
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 
 .stat-box h4 {
@@ -86,12 +116,47 @@ body {
     background: #fff4f9;
     border-radius: 5px;
     border-left: 4px solid #ff69b4;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.meme-list li:hover {
+    transform: translateX(10px);
+    background: #ffe4f3;
 }
 
 .disclaimer {
     font-size: 0.8rem;
     color: #666;
     font-style: italic;
+}
+
+.to-the-moon-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #ff69b4, #ff9ecd);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.to-the-moon-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+@keyframes moon-launch {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-1000px) rotate(720deg); }
+}
+
+.launching {
+    animation: moon-launch 2s ease-in forwards;
 }
 
 @media (max-width: 768px) {
