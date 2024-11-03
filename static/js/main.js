@@ -39,23 +39,39 @@ function hideLoadingScreen() {
     }, 500);
 }
 
-// Initialize Tone.js synth
-const synth = new Tone.Synth({
-    oscillator: {
-        type: "square"
-    },
-    envelope: {
-        attack: 0.1,
-        decay: 0.2,
-        sustain: 0.5,
-        release: 1
-    }
-}).toDestination();
+// Initialize sound effects
+const sfx = {
+    hover: new Tone.Synth({
+        oscillator: { type: "triangle" },
+        envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 }
+    }).toDestination(),
+    
+    click: new Tone.MembraneSynth({
+        pitchDecay: 0.05,
+        octaves: 4,
+        oscillator: { type: "sine" },
+        envelope: { attack: 0.001, decay: 0.2, sustain: 0, release: 0.2 }
+    }).toDestination(),
+    
+    coin: new Tone.MetalSynth({
+        frequency: 200,
+        envelope: { attack: 0.001, decay: 0.1, release: 0.1 },
+        harmonicity: 5.1,
+        modulationIndex: 32,
+        resonance: 4000,
+        octaves: 1.5
+    }).toDestination(),
+    
+    rocket: new Tone.Synth({
+        oscillator: { type: "sawtooth" },
+        envelope: { attack: 0.05, decay: 0.2, sustain: 0.8, release: 1 }
+    }).toDestination()
+};
 
-const coinSound = new Tone.Player({
-    url: "data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA==",
-    autostart: false
-}).toDestination();
+// Initialize volume
+Object.values(sfx).forEach(synth => {
+    synth.volume.value = -20; // Set a reasonable default volume
+});
 
 // Dark mode functionality
 function initializeDarkMode() {
@@ -70,15 +86,22 @@ function initializeDarkMode() {
         updateChart(true);
     }
 
-    darkModeToggle.addEventListener('click', () => {
+    darkModeToggle.addEventListener('click', async () => {
+        await Tone.start();
         document.body.classList.toggle('dark-mode');
         const isDarkMode = document.body.classList.contains('dark-mode');
         darkModeToggle.textContent = isDarkMode ? '🌜' : '🌞';
         localStorage.setItem('darkMode', isDarkMode);
         updateChart(isDarkMode);
         
-        // Play toggle sound
-        synth.triggerAttackRelease(isDarkMode ? "G4" : "E4", "8n");
+        // Play toggle sound with different pitches for dark/light mode
+        sfx.click.triggerAttackRelease(isDarkMode ? "G4" : "E4", "8n");
+    });
+
+    // Add hover sound effect
+    darkModeToggle.addEventListener('mouseenter', async () => {
+        await Tone.start();
+        sfx.hover.triggerAttackRelease("C5", "32n");
     });
 
     // Listen for system dark mode changes
@@ -118,13 +141,19 @@ function createFloatingIcons() {
         icon.addEventListener('click', async () => {
             if (!icon.classList.contains('clicked')) {
                 icon.classList.add('clicked');
-                // Play coin sound
                 await Tone.start();
-                synth.triggerAttackRelease("C5", "8n");
+                // Play coin sound with random pitch variation
+                sfx.coin.triggerAttackRelease(200 + Math.random() * 100);
                 setTimeout(() => {
                     icon.classList.remove('clicked');
                 }, 1000);
             }
+        });
+
+        // Add hover sound effect
+        icon.addEventListener('mouseenter', async () => {
+            await Tone.start();
+            sfx.hover.triggerAttackRelease("E5", "32n");
         });
         
         container.appendChild(icon);
@@ -138,13 +167,19 @@ function initializeStatBoxes() {
         box.addEventListener('click', async () => {
             if (!box.classList.contains('bounce')) {
                 box.classList.add('bounce');
-                // Play stat sound
                 await Tone.start();
-                synth.triggerAttackRelease("E4", "16n");
+                // Play click sound with random pitch
+                sfx.click.triggerAttackRelease("C" + (Math.floor(Math.random() * 2) + 4));
                 setTimeout(() => {
                     box.classList.remove('bounce');
                 }, 500);
             }
+        });
+
+        // Add hover sound effect
+        box.addEventListener('mouseenter', async () => {
+            await Tone.start();
+            sfx.hover.triggerAttackRelease("G4", "32n");
         });
     });
 }
@@ -155,11 +190,11 @@ function initializeMoonButton() {
     if (moonBtn) {
         moonBtn.addEventListener('click', async () => {
             await Tone.start();
-            // Play rocket launch sound
-            const notes = ["C4", "E4", "G4", "C5"];
+            // Play rocket launch sound sequence
+            const notes = ["C4", "E4", "G4", "C5", "E5", "G5"];
             notes.forEach((note, index) => {
                 setTimeout(() => {
-                    synth.triggerAttackRelease(note, "8n");
+                    sfx.rocket.triggerAttackRelease(note, "8n");
                 }, index * 100);
             });
 
@@ -174,6 +209,12 @@ function initializeMoonButton() {
                     el.classList.remove('launching');
                 });
             }, 2000);
+        });
+
+        // Add hover sound effect
+        moonBtn.addEventListener('mouseenter', async () => {
+            await Tone.start();
+            sfx.hover.triggerAttackRelease("A4", "32n");
         });
     }
 }
