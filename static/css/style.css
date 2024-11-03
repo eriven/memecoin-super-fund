@@ -1,9 +1,88 @@
+/* Existing styles */
 body {
     font-family: 'Comic Neue', cursive;
     background-color: #f0f0ff;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+.dark-mode .content-box {
+    background: #2a2a40;
+    border-color: #00ff9d;
+    box-shadow: 0 0 15px #00ff9d;
+    color: #fff;
+}
+
+.dark-mode .stat-box {
+    background: #2a2a40;
+    border-color: #00ff9d;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+}
+
+.dark-mode .stat-box h4 {
+    color: #00ff9d;
+    text-shadow: 0 0 10px #00ff9d;
+}
+
+.dark-mode .stat-box p {
+    color: #fff;
+}
+
+.dark-mode .meme-list li {
+    background: #2a2a40;
+    border-left-color: #00ff9d;
+    color: #fff;
+}
+
+.dark-mode .meme-list li:hover {
+    background: #3a3a50;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+}
+
+.dark-mode .chart-container {
+    background: #2a2a40;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+}
+
+.dark-mode .disclaimer {
+    color: #888;
+}
+
+.dark-mode .to-the-moon-btn {
+    background: linear-gradient(45deg, #00ff9d, #00ccff);
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.4);
+}
+
+.dark-mode .to-the-moon-btn:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 157, 0.6);
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+}
+
+/* Keep existing CSS below */
 .rainbow-text {
     background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
     -webkit-background-clip: text;
@@ -27,7 +106,7 @@ body {
     margin: 20px 0;
     box-shadow: 5px 5px 0px #ff69b4;
     transform: rotate(-1deg);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .content-box:hover {
@@ -52,6 +131,11 @@ body {
     pointer-events: auto;
     cursor: pointer;
     transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.dark-mode .floating-icon {
+    filter: drop-shadow(0 0 10px rgba(0, 255, 157, 0.7));
 }
 
 .floating-icon.clicked {
@@ -96,9 +180,6 @@ body {
 
 .stat-box:hover {
     transform: scale(1.05);
-    background: #ffe4f3;
-    border-style: solid;
-    box-shadow: 0 6px 12px rgba(255, 105, 180, 0.3);
 }
 
 .stat-box.bounce {
@@ -115,15 +196,7 @@ body {
 
 .stat-box h4 {
     font-size: 3rem;
-    color: #ff69b4;
     margin: 0 0 10px 0;
-    text-shadow: 2px 2px 0px rgba(255, 105, 180, 0.2);
-}
-
-.stat-box p {
-    font-size: 1.2rem;
-    margin: 0;
-    color: #666;
 }
 
 .chart-container {
@@ -131,15 +204,8 @@ body {
     width: 100%;
     padding: 20px;
     margin: 30px 0;
-    background: white;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.chart-container:hover {
-    transform: scale(1.01);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
 }
 
 .meme-list {
@@ -150,29 +216,15 @@ body {
 .meme-list li {
     padding: 10px;
     margin: 5px 0;
-    background: #fff4f9;
     border-radius: 5px;
-    border-left: 4px solid #ff69b4;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
-}
-
-.meme-list li:hover {
-    transform: translateX(10px);
-    background: #ffe4f3;
-}
-
-.disclaimer {
-    font-size: 0.8rem;
-    color: #666;
-    font-style: italic;
 }
 
 .to-the-moon-btn {
     display: block;
     margin: 20px auto;
     padding: 15px 30px;
-    background: linear-gradient(45deg, #ff69b4, #ff9ecd);
     border: none;
     border-radius: 25px;
     color: white;
@@ -180,11 +232,6 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.to-the-moon-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
 }
 
 @keyframes moon-launch {

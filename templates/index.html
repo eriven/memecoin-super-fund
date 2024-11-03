@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <button class="dark-mode-toggle" id="darkModeToggle">🌞</button>
+    
     <div class="floating-icons">
         <!-- Background floating icons will be inserted here by JavaScript -->
     </div>
@@ -58,32 +60,63 @@
     <script>
         const chartData = {{ chart_data|safe }};
         const ctx = document.getElementById('performanceChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: chartData.labels,
-                datasets: [{
-                    label: 'Portfolio Performance (in Lambos)',
-                    data: chartData.values,
-                    borderColor: '#ff69b4',
-                    backgroundColor: 'rgba(255, 105, 180, 0.2)',
-                    borderWidth: 3,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            font: {
-                                family: 'Comic Neue'
+        let chart;
+
+        function updateChart(darkMode) {
+            const chartConfig = {
+                type: 'line',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Portfolio Performance (in Lambos)',
+                        data: chartData.values,
+                        borderColor: darkMode ? '#00ff9d' : '#ff69b4',
+                        backgroundColor: darkMode ? 'rgba(0, 255, 157, 0.2)' : 'rgba(255, 105, 180, 0.2)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: {
+                                    family: 'Comic Neue'
+                                },
+                                color: darkMode ? '#fff' : '#666'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: darkMode ? '#fff' : '#666'
+                            },
+                            grid: {
+                                color: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: darkMode ? '#fff' : '#666'
+                            },
+                            grid: {
+                                color: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
                             }
                         }
                     }
                 }
+            };
+
+            if (chart) {
+                chart.destroy();
             }
-        });
+            chart = new Chart(ctx, chartConfig);
+        }
+
+        // Initial chart creation
+        updateChart(false);
     </script>
 </body>
 </html>

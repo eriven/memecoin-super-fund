@@ -16,6 +16,46 @@ const coinSound = new Tone.Player({
     autostart: false
 }).toDestination();
 
+// Dark mode functionality
+function initializeDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Check for saved dark mode preference
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'true' || (savedDarkMode === null && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = '🌜';
+        updateChart(true);
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        darkModeToggle.textContent = isDarkMode ? '🌜' : '🌞';
+        localStorage.setItem('darkMode', isDarkMode);
+        updateChart(isDarkMode);
+        
+        // Play toggle sound
+        synth.triggerAttackRelease(isDarkMode ? "G4" : "E4", "8n");
+    });
+
+    // Listen for system dark mode changes
+    prefersDarkScheme.addEventListener('change', (e) => {
+        if (localStorage.getItem('darkMode') === null) {
+            if (e.matches) {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.textContent = '🌜';
+                updateChart(true);
+            } else {
+                document.body.classList.remove('dark-mode');
+                darkModeToggle.textContent = '🌞';
+                updateChart(false);
+            }
+        }
+    });
+}
+
 // Create floating background icons
 function createFloatingIcons() {
     const icons = ['doge.svg', 'bitcoin.svg', 'ethereum.svg', 'rocket.svg'];
@@ -99,6 +139,7 @@ function initializeMoonButton() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    initializeDarkMode();
     createFloatingIcons();
     initializeStatBoxes();
     initializeMoonButton();
