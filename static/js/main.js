@@ -223,9 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log("Features initialized, preparing to hide loading screen...");
     
-    // Hide loading screen after initialization
-    setTimeout(() => {
-        clearInterval(messageInterval);
-        hideLoadingScreen();
-    }, 2000);
+    // Hide loading screen immediately after initialization
+    clearInterval(messageInterval);
+    hideLoadingScreen();
 });
