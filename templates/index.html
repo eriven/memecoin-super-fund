@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Previous head content remains the same -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,127 +9,87 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .chart-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 1.2em;
+            color: #ff69b4;
+        }
+        
+        .dark-mode .chart-loading {
+            color: #00ff9d;
+        }
+        
+        .chart-error {
+            color: #ff4444;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        .dark-mode .chart-error {
+            color: #ff6b6b;
+        }
+    </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-overlay">
-        <img src="{{ url_for('static', filename='images/doge.svg') }}" alt="Loading..." class="loading-meme">
-        <div class="loading-text">Loading Stonks...</div>
+    <!-- Previous content remains the same until the chart container -->
+    
+    <div class="chart-container">
+        <div id="chartStatus" class="chart-loading" style="display: none;">
+            Loading Stonk Data... 📈
+        </div>
+        <canvas id="performanceChart"></canvas>
+        <div id="chartError" class="chart-error"></div>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content content-hidden">
-        <button class="dark-mode-toggle" id="darkModeToggle">🌞</button>
-        
-        <div class="floating-icons">
-            <!-- Background floating icons will be inserted here by JavaScript -->
-        </div>
-
-        <div class="container">
-            <header class="text-center my-5">
-                <h1 class="rainbow-text">🚀 Meme Super Fund Coin Cycle Capital 🌙</h1>
-                <h2 class="subtitle">We Only Buy High And Sell Higher! 📈</h2>
-                <p class="mt-2">As seen on r/wallstreetbets and your wife's boyfriend's TikTok! 🦍</p>
-            </header>
-
-            <div class="content-box">
-                <h3>💎 Our Diamond Hands Strategy 💎</h3>
-                <p>We YOLO your investment into the dankest meme coins using advanced technical analysis 
-                   (we look at rocket emojis on Twitter and count diamond hands in Discord).</p>
-                <div class="performance-stats">
-                    <div class="stat-box">
-                        <h4>420%</h4>
-                        <p>Annual Returns* <br><small>(Trust me bro)</small></p>
-                    </div>
-                    <div class="stat-box">
-                        <h4>69</h4>
-                        <p>Active Investments <br><small>(Nice)</small></p>
-                    </div>
-                    <div class="stat-box">
-                        <h4>∞</h4>
-                        <p>Potential Gains <br><small>(Not Financial Advice™)</small></p>
-                    </div>
-                </div>
-                <p class="disclaimer">*Past performance doesn't guarantee future results, but memes are forever 🤪</p>
-                <button class="to-the-moon-btn">🚀 TO THE MOON! 🌙</button>
-            </div>
-
-            <div class="content-box">
-                <h3>🤖 Our Advanced Trading Algorithms 🤖</h3>
-                <ul class="meme-list">
-                    <li>🔮 ElonTweetBot 3000: Buys anything Elon tweets about (even by accident)</li>
-                    <li>🦍 APE Intelligence: Monitors Reddit sentiment using advanced "rocket emoji counting" technology</li>
-                    <li>🎮 GameStonk Predictor: If it's trending on WallStreetBets, we're all in!</li>
-                    <li>🌈 Rainbow Chart Analysis: Green means buy, Red means buy more!</li>
-                </ul>
-            </div>
-
-            <div class="chart-container">
-                <canvas id="performanceChart"></canvas>
-            </div>
-
-            <div class="content-box mt-4">
-                <h3>🧠 Investment Philosophy 🧠</h3>
-                <ul class="meme-list">
-                    <li>💰 Buy high, sell higher (this is financial advice)*</li>
-                    <li>🏎️ HODL until Lambo (or Honda Civic, we're not picky)</li>
-                    <li>🤝 Trust me bro™ investment strategy</li>
-                    <li>🐕 1 Doge = 1 Doge (always has been)</li>
-                    <li>📉 Red charts just mean it's on sale!</li>
-                    <li>💎 If your hands aren't diamond, you're doing it wrong</li>
-                    <li>🦍 Apes together strong (but separately for legal reasons)</li>
-                    <li>🎮 Power to the HODLers!</li>
-                </ul>
-                <p class="small">*Not actual financial advice. Please don't sue us, we spent our legal budget on NFTs.</p>
-            </div>
-        </div>
-
-        <!-- Updated Meme-themed Footer -->
-        <footer class="meme-footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section centered-legal">
-                        <h4>🧐 Legal Stuff</h4>
-                        <ul>
-                            <li>📜 Terms & Conditions*</li>
-                            <li>🔒 Privacy Policy**</li>
-                            <li>⚠️ Risk Disclosure***</li>
-                            <li>🤔 FAQ****</li>
-                            <li><a href="https://x.com/0xRizzler" target="_blank" class="footer-link">𝕏 Follow Our Loss Porn</a></li>
-                        </ul>
-                        <p class="footer-notes">
-                            * We make it up as we go<br>
-                            ** We definitely collect your data<br>
-                            *** Number only go up<br>
-                            **** Questions? Just buy more
-                        </p>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>© 2024 Meme Super Fund Coin Cycle Capital 🚀 | Built with 💎🙌 and lots of copium</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!-- Rest of the content remains the same -->
+    
     <script>
         const chartData = {{ chart_data|safe }};
         const ctx = document.getElementById('performanceChart').getContext('2d');
         let chart;
+        let updateInterval;
+
+        async function fetchPrices() {
+            const chartStatus = document.getElementById('chartStatus');
+            const chartError = document.getElementById('chartError');
+            
+            try {
+                chartStatus.style.display = 'block';
+                const response = await fetch('/api/prices');
+                const data = await response.json();
+                
+                if (data.errors && data.errors.length > 0) {
+                    chartError.textContent = data.errors.join(', ');
+                } else {
+                    chartError.textContent = '';
+                }
+                
+                return data;
+            } catch (error) {
+                chartError.textContent = 'Failed to fetch price data';
+                console.error('Error fetching prices:', error);
+                return null;
+            } finally {
+                chartStatus.style.display = 'none';
+            }
+        }
 
         function updateChart(darkMode) {
             const chartConfig = {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: chartData.labels,
                     datasets: [{
-                        label: 'Portfolio Performance (in Lambos)',
+                        label: 'Token Prices (USD)',
                         data: chartData.values,
+                        backgroundColor: darkMode ? '#00ff9d' : '#ff69b4',
                         borderColor: darkMode ? '#00ff9d' : '#ff69b4',
-                        backgroundColor: darkMode ? 'rgba(0, 255, 157, 0.2)' : 'rgba(255, 105, 180, 0.2)',
-                        borderWidth: 3,
-                        tension: 0.4
+                        borderWidth: 2
                     }]
                 },
                 options: {
@@ -156,7 +115,10 @@
                         },
                         y: {
                             ticks: {
-                                color: darkMode ? '#fff' : '#666'
+                                color: darkMode ? '#fff' : '#666',
+                                callback: function(value) {
+                                    return '$' + value.toFixed(4);
+                                }
                             },
                             grid: {
                                 color: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
@@ -173,7 +135,32 @@
         }
 
         // Initial chart creation
-        updateChart(false);
+        updateChart(document.body.classList.contains('dark-mode'));
+
+        // Set up periodic updates
+        async function startPriceUpdates() {
+            const updatePrices = async () => {
+                const newData = await fetchPrices();
+                if (newData) {
+                    chartData.labels = newData.labels;
+                    chartData.values = newData.values;
+                    updateChart(document.body.classList.contains('dark-mode'));
+                }
+            };
+
+            // Initial update
+            await updatePrices();
+
+            // Set up interval for updates
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+            updateInterval = setInterval(updatePrices, 30000); // Update every 30 seconds
+        }
+
+        // Start price updates when DOM is loaded
+        document.addEventListener('DOMContentLoaded', startPriceUpdates);
     </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
