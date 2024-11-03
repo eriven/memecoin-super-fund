@@ -290,8 +290,19 @@ body.dark-mode {
 }
 
 @keyframes launch {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-1000px) rotate(10deg); }
+    0% { 
+        transform: translateY(0); 
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(-1000px) rotate(10deg);
+        opacity: 0;
+    }
+}
+
+.launching {
+    animation: launch 2s ease-in forwards;
+    pointer-events: none;
 }
 
 /* Container */
