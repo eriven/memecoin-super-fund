@@ -58,55 +58,12 @@
     transition: opacity 0.5s ease-in;
 }
 
-/* Floating icons */
-.floating-icons {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.floating-icon {
-    position: absolute;
-    max-width: 50px;
-    max-height: 50px;
-    width: auto;
-    height: auto;
-    pointer-events: auto;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    animation: float 15s linear infinite;
-    z-index: 2;
-}
-
-.floating-icon.clicked {
-    transform: scale(1.2) rotate(360deg);
-}
-
-@keyframes float {
-    from {
-        transform: translateY(-100px);
-    }
-    to {
-        transform: translateY(100vh);
-    }
-}
-
-/* Base styles */
+/* Rest of your existing CSS */
 body {
     font-family: 'Comic Neue', cursive;
     background-color: #f0f0ff;
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.dark-mode {
-    background-color: #1a1a2e;
-    color: #fff;
 }
 
 /* Footer styles */
@@ -125,30 +82,4 @@ body {
     transition: all 0.3s ease;
 }
 
-.dark-mode .meme-footer {
-    background: rgba(0, 255, 157, 0.1);
-    border-top-color: #00ff9d;
-}
-
-.meme-footer a {
-    color: #ff69b4;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    margin: 0 10px;
-    transition: transform 0.3s ease;
-}
-
-.dark-mode .meme-footer a {
-    color: #00ff9d;
-}
-
-.meme-footer .twitter-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 5px;
-}
-
-.dark-mode .meme-footer .twitter-icon {
-    filter: invert(1) hue-rotate(180deg);
-}
+/* ... rest of your existing CSS ... */
