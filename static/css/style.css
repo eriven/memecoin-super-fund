@@ -1,0 +1,106 @@
+body {
+    font-family: 'Comic Neue', cursive;
+    background-color: #f0f0ff;
+    overflow-x: hidden;
+}
+
+.rainbow-text {
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow 15s linear infinite;
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+.content-box {
+    background: white;
+    border: 3px solid #ff69b4;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 5px 5px 0px #ff69b4;
+    transform: rotate(-1deg);
+}
+
+.floating-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+    }
+}
+
+.performance-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 15px;
+    background: #fff4f9;
+    border-radius: 10px;
+    border: 2px dashed #ff69b4;
+}
+
+.stat-box h4 {
+    font-size: 2.5rem;
+    color: #ff69b4;
+    margin: 0;
+}
+
+.meme-list {
+    list-style: none;
+    padding: 0;
+}
+
+.meme-list li {
+    padding: 10px;
+    margin: 5px 0;
+    background: #fff4f9;
+    border-radius: 5px;
+    border-left: 4px solid #ff69b4;
+}
+
+.disclaimer {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .rainbow-text {
+        font-size: 2.5rem;
+    }
+    
+    .performance-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
