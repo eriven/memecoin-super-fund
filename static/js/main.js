@@ -197,9 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Simulate loading time (3 seconds)
-    setTimeout(() => {
-        clearInterval(messageInterval);
-        hideLoadingScreen();
-    }, 3000);
+    // Hide loading screen immediately after initialization
+    clearInterval(messageInterval);
+    hideLoadingScreen();
 });
