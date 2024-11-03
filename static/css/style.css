@@ -250,6 +250,29 @@ body.dark-mode {
     border-top-color: rgba(0, 255, 157, 0.3);
 }
 
+/* Footer link styles */
+.footer-link {
+    color: #ff69b4;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.dark-mode .footer-link {
+    color: #00ff9d;
+}
+
+.footer-link:hover {
+    color: #ff69b4;
+    transform: scale(1.05);
+    text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+}
+
+.dark-mode .footer-link:hover {
+    color: #00ff9d;
+    text-shadow: 0 0 5px rgba(0, 255, 157, 0.5);
+}
+
 /* Animations */
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
