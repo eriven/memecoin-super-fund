@@ -1,11 +1,15 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, send_file
 import os
 import json
+import mimetypes
 
 app = Flask(__name__)
 
-# Configure static files path
+# Configure static files path and MIME types
 static_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('text/css', '.css')
+mimetypes.add_type('image/svg+xml', '.svg')
 
 @app.route('/')
 def index():
@@ -18,7 +22,20 @@ def index():
 
 @app.route('/static/<path:path>')
 def serve_static(path):
-    return send_from_directory('static', path)
+    try:
+        # Get file extension and MIME type
+        _, ext = os.path.splitext(path)
+        mime_type = mimetypes.types_map.get(ext, 'application/octet-stream')
+        
+        # Set cache control based on file type
+        cache_control = 'public, max-age=86400' if ext == '.svg' else 'public, max-age=0, must-revalidate'
+        
+        response = send_from_directory('static', path, mimetype=mime_type)
+        response.headers['Cache-Control'] = cache_control
+        return response
+    except Exception as e:
+        print(f"Error serving static file {path}: {str(e)}")
+        return f"Error serving static file: {path}", 404
 
 # For Vercel deployment
 app = app

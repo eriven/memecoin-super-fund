@@ -10,22 +10,34 @@
         {
             "src": "/static/js/(.*)",
             "dest": "/static/js/$1",
-            "headers": { "Content-Type": "application/javascript" }
+            "headers": {
+                "Cache-Control": "public, max-age=0, must-revalidate",
+                "Content-Type": "application/javascript; charset=utf-8"
+            }
         },
         {
             "src": "/static/css/(.*)",
             "dest": "/static/css/$1",
-            "headers": { "Content-Type": "text/css" }
+            "headers": {
+                "Cache-Control": "public, max-age=0, must-revalidate",
+                "Content-Type": "text/css; charset=utf-8"
+            }
         },
         {
             "src": "/static/images/(.*)",
             "dest": "/static/images/$1",
-            "headers": { "Content-Type": "image/svg+xml" }
+            "headers": {
+                "Cache-Control": "public, max-age=86400",
+                "Content-Type": "image/svg+xml"
+            }
         },
         {
             "src": "/static/sounds/(.*)",
             "dest": "/static/sounds/$1",
-            "headers": { "Content-Type": "application/javascript" }
+            "headers": {
+                "Cache-Control": "public, max-age=0, must-revalidate",
+                "Content-Type": "application/javascript; charset=utf-8"
+            }
         },
         {
             "src": "/(.*)",
