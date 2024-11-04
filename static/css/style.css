@@ -3,7 +3,6 @@ body {
     font-family: 'Comic Neue', cursive;
     background-color: #f0f0ff;
     overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -41,7 +40,6 @@ body.dark-mode {
     justify-content: center;
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
 }
 
 .dark-mode .dark-mode-toggle {
@@ -61,7 +59,6 @@ body.dark-mode {
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
     text-transform: uppercase;
     font-weight: bold;
     box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
@@ -70,15 +67,6 @@ body.dark-mode {
 .dark-mode .to-the-moon-btn {
     background: #00ff9d;
     box-shadow: 0 4px 15px rgba(0, 255, 157, 0.3);
-}
-
-.to-the-moon-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
-}
-
-.dark-mode .to-the-moon-btn:hover {
-    box-shadow: 0 6px 20px rgba(0, 255, 157, 0.4);
 }
 
 /* Floating icons */
@@ -100,7 +88,6 @@ body.dark-mode {
     cursor: pointer;
     opacity: 0.6;
     animation: float 15s linear infinite;
-    transition: transform 0.3s ease;
     z-index: 1;
 }
 
@@ -112,7 +99,6 @@ body.dark-mode {
     margin: 30px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 2px solid #ff69b4;
-    transition: all 0.3s ease;
     position: relative;
     z-index: 2;
 }
@@ -138,7 +124,6 @@ body.dark-mode {
     border-radius: 10px;
     background: rgba(255, 105, 180, 0.1);
     cursor: pointer;
-    transition: transform 0.3s ease;
     flex: 1;
     min-width: 200px;
 }
@@ -165,7 +150,6 @@ body.dark-mode {
     padding: 40px 0 20px;
     margin-top: auto;
     border-top: 2px solid #ff69b4;
-    transition: all 0.3s ease;
     position: relative;
     z-index: 2;
 }
@@ -192,12 +176,10 @@ body.dark-mode {
     color: #ff69b4;
     font-size: 1.3rem;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dark-mode .footer-section h4 {
     color: #00ff9d;
-    text-shadow: 2px 2px 4px rgba(0, 255, 157, 0.2);
 }
 
 .footer-section ul {
@@ -209,13 +191,8 @@ body.dark-mode {
 .footer-section ul li {
     margin: 15px 0;
     cursor: pointer;
-    transition: transform 0.3s ease;
     position: relative;
     z-index: 3;
-}
-
-.footer-section ul li:hover {
-    transform: scale(1.05);
 }
 
 .footer-notes {
@@ -240,50 +217,11 @@ body.dark-mode {
 .footer-link {
     color: #ff69b4;
     text-decoration: none;
-    transition: all 0.3s ease;
     display: inline-block;
 }
 
 .dark-mode .footer-link {
     color: #00ff9d;
-}
-
-.footer-link:hover {
-    color: #ff69b4;
-    transform: scale(1.05);
-    text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
-}
-
-.dark-mode .footer-link:hover {
-    color: #00ff9d;
-    text-shadow: 0 0 5px rgba(0, 255, 157, 0.5);
-}
-
-/* Animations */
-@keyframes float {
-    0% { transform: translateY(-100vh); }
-    100% { transform: translateY(100vh); }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes launch {
-    0% { 
-        transform: translateY(0); 
-        opacity: 1;
-    }
-    100% { 
-        transform: translateY(-1000px) rotate(10deg);
-        opacity: 0;
-    }
-}
-
-.launching {
-    animation: launch 2s ease-in forwards;
-    pointer-events: none;
 }
 
 /* Container */
@@ -293,4 +231,10 @@ body.dark-mode {
     padding: 0 20px;
     position: relative;
     z-index: 2;
+}
+
+/* Animation for floating icons only */
+@keyframes float {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
 }
