@@ -233,8 +233,29 @@ body.dark-mode {
     z-index: 2;
 }
 
-/* Animation for floating icons only */
+/* Animations */
 @keyframes float {
     0% { transform: translateY(-100vh); }
     100% { transform: translateY(100vh); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes launch {
+    0% { 
+        transform: translateY(0); 
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(-1000px) rotate(10deg);
+        opacity: 0;
+    }
+}
+
+.launching {
+    animation: launch 2s ease-in forwards;
+    pointer-events: none;
 }
