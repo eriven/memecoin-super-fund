@@ -8,8 +8,24 @@
     ],
     "routes": [
         {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
+            "src": "/static/js/(.*)",
+            "dest": "/static/js/$1",
+            "headers": { "Content-Type": "application/javascript" }
+        },
+        {
+            "src": "/static/css/(.*)",
+            "dest": "/static/css/$1",
+            "headers": { "Content-Type": "text/css" }
+        },
+        {
+            "src": "/static/images/(.*)",
+            "dest": "/static/images/$1",
+            "headers": { "Content-Type": "image/svg+xml" }
+        },
+        {
+            "src": "/static/sounds/(.*)",
+            "dest": "/static/sounds/$1",
+            "headers": { "Content-Type": "application/javascript" }
         },
         {
             "src": "/(.*)",
