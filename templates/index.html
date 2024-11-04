@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Previous head content remains the same -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,14 +11,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-overlay">
-        <img src="{{ url_for('static', filename='images/doge.svg') }}" alt="Loading..." class="loading-meme">
-        <div class="loading-text">Loading Stonks...</div>
-    </div>
-
     <!-- Main Content -->
-    <div class="main-content content-hidden">
+    <div class="main-content">
         <button class="dark-mode-toggle" id="darkModeToggle">🌞</button>
         
         <div class="floating-icons">
@@ -85,7 +78,7 @@
             </div>
         </div>
 
-        <!-- Updated Meme-themed Footer -->
+        <!-- Meme-themed Footer -->
         <footer class="meme-footer">
             <div class="container">
                 <div class="footer-content">

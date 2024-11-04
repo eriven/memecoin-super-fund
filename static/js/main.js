@@ -1,52 +1,7 @@
-// Loading screen functionality
-const loadingMessages = [
-    "Mining Dogecoins...",
-    "HODLing Strong...",
-    "Checking Elon's tweets...",
-    "Buying High...",
-    "Planning Moon Mission...",
-    "Drawing Technical Analysis...",
-    "Counting Lambos...",
-    "Reading Reddit DD..."
-];
-
-function updateLoadingText() {
-    console.log("Starting loading sequence...");
-    const loadingText = document.querySelector('.loading-text');
-    let messageIndex = 0;
-    
-    const interval = setInterval(() => {
-        loadingText.textContent = loadingMessages[messageIndex];
-        messageIndex = (messageIndex + 1) % loadingMessages.length;
-    }, 1000);
-
-    return interval;
-}
-
-function hideLoadingScreen() {
-    console.log("Hiding loading screen...");
-    const loadingOverlay = document.querySelector('.loading-overlay');
-    const mainContent = document.querySelector('.main-content');
-    
-    // Fade out loading screen
-    loadingOverlay.style.opacity = '0';
-    
-    // Show main content
-    mainContent.classList.remove('content-hidden');
-    mainContent.style.opacity = '1';
-    
-    // Remove loading overlay after animation
-    setTimeout(() => {
-        loadingOverlay.style.display = 'none';
-        console.log("Loading screen hidden, main content visible");
-    }, 500);
-}
-
 // Initialize sound effects with error handling
 let sfx = {};
 
 async function initializeSoundEffects() {
-    console.log("Initializing sound effects...");
     try {
         await Tone.start();
         console.log("Tone.js started successfully");
@@ -99,7 +54,6 @@ async function initializeSoundEffects() {
 
 // Add "To The Moon" button functionality
 function initializeMoonButton() {
-    console.log("Initializing moon button...");
     const moonBtn = document.querySelector('.to-the-moon-btn');
     if (moonBtn) {
         moonBtn.addEventListener('click', async () => {
@@ -146,7 +100,6 @@ function initializeMoonButton() {
 
 // Dark mode functionality
 function initializeDarkMode() {
-    console.log("Initializing dark mode...");
     const darkModeToggle = document.getElementById('darkModeToggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     
@@ -187,7 +140,6 @@ function initializeDarkMode() {
 
 // Create floating background icons
 function createFloatingIcons() {
-    console.log("Creating floating icons...");
     const icons = ['doge.svg', 'bitcoin.svg', 'ethereum.svg', 'rocket.svg'];
     const container = document.querySelector('.floating-icons');
     
@@ -241,7 +193,6 @@ function createFloatingIcons() {
 
 // Initialize stat boxes
 function initializeStatBoxes() {
-    console.log("Initializing stat boxes...");
     const statBoxes = document.querySelectorAll('.stat-box');
     statBoxes.forEach(box => {
         box.addEventListener('click', async () => {
@@ -275,25 +226,14 @@ function initializeStatBoxes() {
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("DOM Content Loaded - Starting initialization...");
     
-    // Start loading animation
-    const messageInterval = updateLoadingText();
-    
     try {
-        // Initialize sound effects first
         await initializeSoundEffects();
-        
-        // Initialize features
         initializeDarkMode();
         createFloatingIcons();
         initializeStatBoxes();
         initializeMoonButton();
-        
-        console.log("Features initialized, preparing to hide loading screen...");
+        console.log("Features initialized successfully");
     } catch (error) {
         console.error("Error during initialization:", error);
-    } finally {
-        // Hide loading screen even if there were errors
-        clearInterval(messageInterval);
-        hideLoadingScreen();
     }
 });
